@@ -30,14 +30,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+            getResult("Kurchatov")
 
 
         binding.recView.adapter = adapter
 
-        binding.weatherButton.setOnClickListener {
-            getResult("Kurchatov")
-        }
+//        binding.weatherButton.setOnClickListener {
+//            getResult("Kurchatov")
+//        }
 
     }
 
