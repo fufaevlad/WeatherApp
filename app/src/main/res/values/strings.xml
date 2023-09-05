@@ -1,7 +1,10 @@
 <resources>
-    <string name="app_name">Погода в Курчатове</string>
+    <string name="app_name">Погода в Гагарине</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="date">17/08/23</string>
     <string name="condition">Sunny</string>
+    <string name="wind_speed">Скорость ветра</string>
+    <string name="humidity">Влажность</string>
+    <string name="avg_temperature">Температура</string>
 </resources>

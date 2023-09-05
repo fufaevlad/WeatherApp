@@ -17,7 +17,7 @@ class itemAdapter(private val dataList: List<WeatherClass>):RecyclerView.Adapter
             binding.tvDate.text = item.currentDate
             binding.tvHumid.text = item.humidity.toString()
             binding.tvWindSpeed.text = item.windSpeed.toString()
-            Picasso.get().load("https:${item.image}").into(binding.weatherIcon);
+            Picasso.get().load("https:${item.image}").into(binding.weatherIcon)
         }
 
     }
