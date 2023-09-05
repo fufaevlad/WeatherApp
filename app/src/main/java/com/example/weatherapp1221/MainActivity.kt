@@ -12,7 +12,7 @@ import com.squareup.picasso.Picasso
 import org.json.JSONObject
 
 const val API_KEY = "a8089af300b845ccbe3142629231008"
-
+var city = "Gagarin"
 class MainActivity : AppCompatActivity() {
 
     private lateinit var activityBinding: ActivityMainBinding
@@ -34,10 +34,18 @@ class MainActivity : AppCompatActivity() {
          activityBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(activityBinding.root)
 
-            getResult("Gagarin")
+            getResult(city)
 
         activityBinding.recView.adapter = adapter
-
+        activityBinding.renewButton.setOnClickListener {
+            if(city=="Gagarin") {
+                getResult("Zelenograd")
+                city = "Zelenograd"
+            } else if(city == "Zelenograd"){
+                getResult("Gagarin")
+                city = "Gagarin"
+            }
+        }
 
     }
 
@@ -61,7 +69,7 @@ class MainActivity : AppCompatActivity() {
                 val currentConditionTextPrimary = conditionToday.getString("text")
                 var currentConditionText:String = translate(currentConditionTextPrimary)
 
-                activityBinding.currantTxtCondition.text = "Сейчас "+ currentConditionText.lowercase()
+                activityBinding.currantTxtCondition.text = "Сейчас в ${translate(city)} "+ currentConditionText.lowercase()
                 activityBinding.tvCurTemp.text = tempC+"°C"
                 activityBinding.requestTime.text = lastUpdate
                 Picasso.get().load("https:${conditionIconToday}").into(activityBinding.imgConditionCurrent)
@@ -106,6 +114,8 @@ class MainActivity : AppCompatActivity() {
     fun translate(txtConditionInput:String):String{
         var txtConditionOutput:String = " "
         when(txtConditionInput){
+            "Gagarin" -> txtConditionOutput = "Гагарине"
+            "Zelenograd" -> txtConditionOutput = "Зеленограде"
             "Sunny" -> txtConditionOutput = "Cолнечно"
             "Partly cloudy" -> txtConditionOutput = "Переменная облачность"
             "Cloudy" -> txtConditionOutput = "Облачно"
