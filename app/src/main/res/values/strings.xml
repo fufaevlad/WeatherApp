@@ -7,4 +7,5 @@
     <string name="wind_speed">Скорость ветра</string>
     <string name="humidity">Влажность</string>
     <string name="avg_temperature">Температура</string>
+    <string name="curTemp">32°C</string>
 </resources>

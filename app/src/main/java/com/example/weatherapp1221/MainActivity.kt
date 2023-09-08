@@ -116,6 +116,7 @@ class MainActivity : AppCompatActivity() {
         when(txtConditionInput){
             "Gagarin" -> txtConditionOutput = "Гагарине"
             "Zelenograd" -> txtConditionOutput = "Зеленограде"
+            "Clear" -> txtConditionOutput = "Ясно"
             "Sunny" -> txtConditionOutput = "Cолнечно"
             "Partly cloudy" -> txtConditionOutput = "Переменная облачность"
             "Cloudy" -> txtConditionOutput = "Облачно"

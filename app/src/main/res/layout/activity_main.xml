@@ -45,16 +45,17 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:text="12:00"
-                android:textSize="20sp"
+                android:textSize="20dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.constraintlayout.utils.widget.ImageFilterButton
                 android:id="@+id/renewButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="52dp"
+                android:layout_height="53dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
+                android:contentDescription="rebutton"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/baseline_autorenew_24" />
@@ -64,20 +65,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:text="32°C"
-                android:textSize="70sp"
+                android:layout_marginBottom="76dp"
+                android:text="@string/curTemp"
+                android:textSize="60dp"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/imgConditionCurrent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/requestTime"
+                app:layout_constraintVertical_bias="0.68" />
 
             <ImageView
                 android:id="@+id/imgConditionCurrent"
                 android:layout_width="117dp"
                 android:layout_height="118dp"
                 android:layout_marginEnd="16dp"
+                android:layout_marginBottom="80dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintEnd_toEndOf="parent" />
 
             <TextView
                 android:id="@+id/currantTxtCondition"
@@ -85,9 +90,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 android:text="condition"
-                android:textSize="20sp"
+                android:textSize="20dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.501"
                 app:layout_constraintStart_toStartOf="parent" />
 
 
@@ -114,16 +120,6 @@
 
     </androidx.recyclerview.widget.RecyclerView>
 
-    <!--    <ImageButton-->
-<!--        android:id="@+id/imageButton"-->
-<!--        android:layout_width="59dp"-->
-<!--        android:layout_height="65dp"-->
-<!--        android:layout_marginBottom="16dp"-->
-<!--        android:background="@null"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:srcCompat="@drawable/baseline_autorenew_24"-->
-<!--        android:contentDescription="Renew"/>-->
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
