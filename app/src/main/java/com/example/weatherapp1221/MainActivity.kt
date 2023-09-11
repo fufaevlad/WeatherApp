@@ -1,22 +1,34 @@
 package com.example.weatherapp1221
 
 import android.annotation.SuppressLint
+import android.content.pm.PackageManager
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.weatherapp1221.databinding.ActivityMainBinding
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.ktx.analytics
+import com.google.firebase.ktx.Firebase
 import com.squareup.picasso.Picasso
 import org.json.JSONObject
 
+
+private lateinit var analytics: FirebaseAnalytics
+
+
 const val API_KEY = "a8089af300b845ccbe3142629231008"
 var city = "Gagarin"
+
+
 class MainActivity : AppCompatActivity() {
 
     private lateinit var activityBinding: ActivityMainBinding
-
 
     var item0 = WeatherClass("date",0.0,0.0, 0.0,"Condition"," ")
     var item1 = WeatherClass("date",0.0,0.0, 0.0,"Condition"," ")
@@ -25,11 +37,11 @@ class MainActivity : AppCompatActivity() {
 //    var item4 = WeatherClass("date",0.0,0.0, 0.0,"Condition"," ")
 
     var itemList = listOf<WeatherClass>(item0, item1, item2)
-
-
     val adapter = itemAdapter(itemList)
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        analytics = Firebase.analytics
+
         super.onCreate(savedInstanceState)
          activityBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(activityBinding.root)
@@ -74,8 +86,6 @@ class MainActivity : AppCompatActivity() {
                 activityBinding.requestTime.text = lastUpdate
                 Picasso.get().load("https:${conditionIconToday}").into(activityBinding.imgConditionCurrent)
 
-
-
                 val forecast = obj.getJSONObject("forecast")
                 val forecastDayArray = forecast.getJSONArray("forecastday")
 
@@ -110,6 +120,8 @@ class MainActivity : AppCompatActivity() {
         )
         queue.add(stringRequest)
     }
+
+
 
     fun translate(txtConditionInput:String):String{
         var txtConditionOutput:String = " "
@@ -165,15 +177,7 @@ class MainActivity : AppCompatActivity() {
             "Moderate or heavy rain with thunder" -> txtConditionOutput = "Сильный дождь с грозой"
             "Patchy light snow with thunder" -> txtConditionOutput = "Небольшой снег с грозой"
             "Moderate or heavy snow with thunder" -> txtConditionOutput = "Сильный снег с грозой"
-
-
-
-
-
-
-
         }
         return txtConditionOutput
     }
-
 }
