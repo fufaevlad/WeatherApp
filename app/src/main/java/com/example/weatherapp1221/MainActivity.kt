@@ -1,13 +1,13 @@
 package com.example.weatherapp1221
 
 import android.annotation.SuppressLint
-import android.content.pm.PackageManager
-import android.os.Build
+import android.app.NotificationManager
+import android.content.Context
+import android.content.Intent
+import android.provider.Settings
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.content.ContextCompat
 import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
@@ -28,6 +28,8 @@ var city = "Gagarin"
 
 class MainActivity : AppCompatActivity() {
 
+
+
     private lateinit var activityBinding: ActivityMainBinding
 
     var item0 = WeatherClass("date",0.0,0.0, 0.0,"Condition"," ")
@@ -40,6 +42,13 @@ class MainActivity : AppCompatActivity() {
     val adapter = itemAdapter(itemList)
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        if (!notificationManager.isNotificationPolicyAccessGranted) {
+            val intent = Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS)
+            startActivity(intent)
+        }
+
         analytics = Firebase.analytics
 
         super.onCreate(savedInstanceState)
