@@ -1,10 +1,7 @@
 package com.example.weatherapp1221
 
+
 import android.annotation.SuppressLint
-import android.app.NotificationManager
-import android.content.Context
-import android.content.Intent
-import android.provider.Settings
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -15,6 +12,7 @@ import com.example.weatherapp1221.databinding.ActivityMainBinding
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.messaging.FirebaseMessaging
 import com.squareup.picasso.Picasso
 import org.json.JSONObject
 
@@ -27,35 +25,38 @@ var city = "Gagarin"
 
 
 class MainActivity : AppCompatActivity() {
-
-
-
     private lateinit var activityBinding: ActivityMainBinding
+    val apiVersion = CheckApi()
+
+
+
 
     var item0 = WeatherClass("date",0.0,0.0, 0.0,"Condition"," ")
     var item1 = WeatherClass("date",0.0,0.0, 0.0,"Condition"," ")
     var item2 = WeatherClass("date",0.0,0.0, 0.0,"Condition"," ")
-//    var item3 = WeatherClass("date",0.0,0.0, 0.0,"Condition"," ")
-//    var item4 = WeatherClass("date",0.0,0.0, 0.0,"Condition"," ")
-
     var itemList = listOf<WeatherClass>(item0, item1, item2)
     val adapter = itemAdapter(itemList)
 
-    override fun onCreate(savedInstanceState: Bundle?) {
 
-        val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        if (!notificationManager.isNotificationPolicyAccessGranted) {
-            val intent = Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS)
-            startActivity(intent)
-        }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        Log.e("TAG","API VERSION : $apiVersion")
 
         analytics = Firebase.analytics
 
+        FirebaseMessaging.getInstance().token.addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                val token = task.result
+                Log.e("TAG", "Your token is $token")
+            } else {
+                Log.e("Token", "Failed to get token: ${task.exception}")
+            }
+        }
+
         super.onCreate(savedInstanceState)
-         activityBinding = ActivityMainBinding.inflate(layoutInflater)
+        activityBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(activityBinding.root)
 
-            getResult(city)
+        getResult(city)
 
         activityBinding.recView.adapter = adapter
         activityBinding.renewButton.setOnClickListener {
@@ -67,7 +68,6 @@ class MainActivity : AppCompatActivity() {
                 city = "Gagarin"
             }
         }
-
     }
 
     @SuppressLint("NotifyDataSetChanged")
